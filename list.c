@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "list.h"
-
 
 void print_list(song_node *n ) {
   while(n) {
@@ -15,17 +13,14 @@ void print_list(song_node *n ) {
 
 
 song_node * insert_front(song_node *n, char title[], char ar[]){
-
   song_node *new = (song_node *)malloc(sizeof(song_node));
-
   new->next = n;
   strcpy(new->name,title);
   strcpy(new->artist,ar);
-
   return new;
 }
 
-
+/*
 song_node * insert_order(song_node *n, char title[], char ar[]){
   
   song_node *new = (song_node *)malloc(sizeof(song_node));
@@ -46,7 +41,7 @@ song_node * insert_order(song_node *n, char title[], char ar[]){
   ncurr = n->next; //2 (ncurr = next current)
 
   while (curr && ncurr){
-    if (strcmp(title, curr->name) > 0){
+    if (strcmp(title, curr->name) < 0){
       head = new;
       head->next = curr;
       return head; 
@@ -66,7 +61,7 @@ song_node * insert_order(song_node *n, char title[], char ar[]){
   }
 
   if (curr){ //odd # of songs to compare
-    if (strcmp(title, curr->name) > 0){ //insert after where u left off (ncurr)
+    if (strcmp(title, curr->name) < 0){ //insert after where u left off (ncurr)
       head = new;
       head->next = curr;
       return head; 
@@ -78,6 +73,41 @@ song_node * insert_order(song_node *n, char title[], char ar[]){
   }
 
 return first;
+}
+*/
+
+song_node * insert_order(song_node *n, char title[], char ar[]){
+
+  song_node *head = (song_node *)malloc(sizeof(song_node));
+  head = n;
+
+  song_node *new = (song_node *)malloc(sizeof(song_node));
+  strcpy(new->name,title); //new's name
+  strcpy(new->artist,ar); //new's artist
+
+  //if it's ordered to be first 
+  if (strcmp(title, n->name) < 0){
+      new->next = n;
+      return new; 
+    }
+
+  else{
+    n = n->next;
+    while (n){
+      //n = n->next; //new current position
+      if (strcmp(title, n->next->name) < 0){ //check next name if greater
+        n-> next = new;
+        new->next = n->next;
+        return head; 
+      }
+      n = n->next; //new current position
+    }
+    n->next = new;
+    return head;
+
+
+  }
+
 }
 
 /*
@@ -133,7 +163,7 @@ int main() {
   strcpy(n2->name,"bae");
   strcpy(n3->name,"day");
   
-  print_list(head);
+  //print_list(head);
 
   /*
   song_node *n4 = (song_node *)malloc(sizeof(song_node));
@@ -141,8 +171,8 @@ int main() {
   strcpy(n4->name,"aaaa");
   */
 
-  head = insert_front(head, "aaaa","h");
-  print_list(head);
+  //head = insert_front(head, "aaaa","h");
+  //print_list(head);
   head = insert_order(head, "ccc","h");
   print_list(head);
 
