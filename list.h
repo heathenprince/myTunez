@@ -7,8 +7,9 @@ typedef struct song_node{
 
 //and later:
 
-song_node *table[26];
+//song_node *table[26];
 
-void print_list( struct node * );
-struct node * insert_front( struct node *n, int  d );
-struct node * free_list( struct node *n );
+void print_list(song_node * n);
+song_node * insert_front(song_node *n, char title[], char ar[]);
+song_node * insert_order(song_node *n, char title[], char ar[]);
+song_node * free_list(song_node * n);
