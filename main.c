@@ -2,10 +2,12 @@
 #include <stdlib.h>
 
 #include "list.h"
+#include "list.c" 
 
 
 int main() {
 
+  /*
   struct node *list = 0;
 
   print_list( list );
@@ -19,6 +21,10 @@ int main() {
   list = free_list( list );
 
   print_list( list );
+
+  */
+
+  
   
   return 0;
 }
