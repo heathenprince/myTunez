@@ -34,7 +34,7 @@ song_node * find_song(song_node *n, char title[]){
 			return n;
 		n = n->next;
 	}
-	printf("Song Not Found\n");
+	printf("Requested song was not found. \n");
   	return 0;
 }
 
@@ -44,8 +44,8 @@ song_node * artist_first_song(song_node *n, char ar[]){
 			return n;
 		n = n->next;
 	}
-	printf("Artist Not Found\n");
-  	return NULL;
+	printf("Requested artist was not found. \n");
+  	return 0;
 }
 
 song_node * rand_node(song_node *n){
@@ -53,7 +53,23 @@ song_node * rand_node(song_node *n){
 }
 
 song_node * remove_node(song_node *n, char title[], char ar[]){
-
+	song_node *cur = n;
+ 	song_node *prev = 0;
+  	song_node *sn = find_song(n, title);
+  	if (!sn) //if node doesnt exist
+    	return n;
+    if (cur == sn) { //first test
+    	n = n->next;
+    	free(cur);
+    	return n;
+  	}
+  	while(cur != sn && cur->next) {
+    	prev = cur;
+    	cur = cur->next;
+  	}
+  	prev->next = cur->next; //remove sn
+  	free(cur);
+  	return n;
 }
 
 
@@ -135,7 +151,10 @@ int main() {
   print_list(chosenArtist); //c-bae , etc. (proves that it found the song)
   chosenArtist = artist_first_song(head,"kek");
   print_list(chosenArtist); // nothing prints out bc it does not exist
-	*/
+  */
+
+  //head = remove_node(head,"day","p");
+  //print_list(head);
 
   return 0;
 }
