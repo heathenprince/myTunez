@@ -1,6 +1,7 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "list.h"
 
 song_node * insert_front(song_node *n, char title[], char ar[]){
@@ -29,28 +30,35 @@ void print_list(song_node *n) {
 }
 //======================================================================================
 song_node * find_song(song_node *n, char title[]){
-	while (n){
-		if (strcmp(n->name, title) == 0)
-			return n;
-		n = n->next;
-	}
-	printf("Requested song was not found. \n");
-  	return 0;
+  while (n) {
+    if (!strcmp(n->name, title)) {
+      return n;
+    }
+    n = n->next;
+  }
+  return 0;
 }
 //======================================================================================
 song_node * artist_first_song(song_node *n, char ar[]){
-	while (n->next){
-		if (strcmp(n->artist, ar) == 0)
-			return n;
-		n = n->next;
-	}
-	printf("Requested artist was not found. \n");
-  	return 0;
+  while (n) {
+    if (!strcmp(n->artist, ar)) {
+      return n;
+    }
+    n = n->next;
+  }
+  return 0;
 }
+/*
 //======================================================================================
 song_node * rand_node(song_node *n){
-
+  int r = rand() % length(n);
+  while (r) {
+  	r--;
+    n = n->next;
+  }
+  return n;
 }
+*/
 //======================================================================================
 song_node * remove_node(song_node *n, char title[], char ar[]){
 	song_node *cur = n;
@@ -83,6 +91,7 @@ song_node * free_list(song_node * n){
   return n;
 }
 //======================================================================================
+/*
 int main() {
 
   song_node *head;
@@ -156,7 +165,7 @@ int main() {
 }
 
 
-/* OUTPUT OF RUNNING AND TESTING CODE ==================================================
+OUTPUT OF RUNNING AND TESTING CODE ==================================================
 
 Adding song: artist = x, song = ayy 
 Adding song: artist = y, song = bbb 

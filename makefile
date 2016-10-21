@@ -1,8 +1,8 @@
 GCC = gcc -g
 
 
-songtest: list.c
-	gcc list.c -o songtest
+songtest: list.c playlist.c main.c
+	gcc list.c playlist.c main.c -o songtest
 
 run: songtest
 	./songtest
