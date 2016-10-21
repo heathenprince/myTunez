@@ -3,15 +3,6 @@
 #include <string.h>
 #include "list.h"
 
-void print_list(song_node *n ) {
-  while(n) {
-    printf("%s-%s ", n->artist, n->name );
-    n = n->next;
-  }
-  printf("\n");
-}
-
-
 song_node * insert_front(song_node *n, char title[], char ar[]){
   song_node *new = (song_node *)malloc(sizeof(song_node));
   new->next = n;
@@ -29,20 +20,56 @@ song_node * insert_order(song_node *n, char title[], char ar[]){
   return n;
 }
 
-
-/*
-song_node * free_list(song_node * n){
-
-  song_node *f = n;
-  while ( n ) {
+void print_list(song_node *n) {
+  while(n) {
+    printf("%s-%s ", n->artist, n->name);
     n = n->next;
-    printf("freeing node: %d\n", f->data );
+  }
+  printf("\n");
+}
+
+song_node * find_song(song_node *n, char title[]){
+	while (n){
+		if (strcmp(n->name, title) == 0)
+			return n;
+		n = n->next;
+	}
+	printf("Song Not Found\n");
+  	return 0;
+}
+
+song_node * artist_first_song(song_node *n, char ar[]){
+	while (n->next){
+		if (strcmp(n->artist, ar) == 0)
+			return n;
+		n = n->next;
+	}
+	printf("Artist Not Found\n");
+  	return NULL;
+}
+
+song_node * rand_node(song_node *n){
+
+}
+
+song_node * remove_node(song_node *n, char title[], char ar[]){
+
+}
+
+
+
+
+song_node * free_list(song_node * n){
+  song_node *f = n;
+  while (n) {
+    n = n->next;
+    printf("freeing node: %s %s %s \n", f->artist, "-", f->name );
     free(f);
     f = n;    
   }
   return n;
 }
-*/
+
 
 
 //================================================================
@@ -94,9 +121,21 @@ int main() {
   //head = insert_front(head, "aaaa","h");
   //print_list(head);
   head = insert_order(head, "ccc","h");
-  print_list(head);
-  
-
+  //print_list(head);
+  //head = free_list(head);
+  //print_list(head);
+  /*
+  song_node *chosenSong = artist_first_song(head,"c");
+  print_list(chosenSong); //c-bae , etc. (proves that it found the song)
+  chosenSong = artist_first_song(head,"aaa");
+  print_list(chosenSong); // nothing prints out bc it does not exist
+  */
+  /*
+  song_node *chosenArtist = artist_first_song(head,"c");
+  print_list(chosenArtist); //c-bae , etc. (proves that it found the song)
+  chosenArtist = artist_first_song(head,"kek");
+  print_list(chosenArtist); // nothing prints out bc it does not exist
+	*/
 
   return 0;
 }
