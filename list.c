@@ -21,42 +21,14 @@ song_node * insert_front(song_node *n, char title[], char ar[]){
 }
 
 song_node * insert_order(song_node *n, char title[], char ar[]){
-
-  song_node *head = n;
-
-  song_node *new = (song_node *)malloc(sizeof(song_node));
-  strcpy(new->name,title); //new's name
-  strcpy(new->artist,ar); //new's artist
-
-  //if it's ordered to be first 
-  if (strcmp(title, n->name) < 0){
-      new->next = n;
-      return new; 
-    }
-  else{
-    printf("%s \n", n->name);
-    n = n->next;
-    while (n){
-      //n = n->next; //new current position
-      if (strcmp(title, (n->next)->name) < 0){ //check next name if greater
-	printf("%s \n", n->name);
-        n-> next = new;
-	printf("%s \n", n->next->name);
-        new->next = n->next;
-	printf("%s \n", new->next->name);
-	printf("%s \n", n->name);
-        return head;
-      }
-      n = n->next; //new current position
-    }
-    
-    n->next = new;
-    return head;
-
-
-  }
-
+  if (!n || strcmp(ar, n->artist) < 0) //if artist is diff and song is smaller
+    return insert_front(n,title,ar);
+  if (strcmp(ar, n->artist) == 0 && strcmp(n, n->name) < 0) //same artise, song is smaller
+    return insert_front(n,title,ar);
+  n->next = insert_order(n->next,title,ar); //redo, current node moves up one
+  return n;
 }
+
 
 /*
 song_node * free_list(song_node * n){
@@ -122,7 +94,7 @@ int main() {
   //head = insert_front(head, "aaaa","h");
   //print_list(head);
   head = insert_order(head, "ccc","h");
-  //print_list(head);
+  print_list(head);
   
 
 
