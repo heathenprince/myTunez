@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "list.h"
 
 //=================INSERT FUNCTIONS=================
-node* insert_front( node* next_node, char node_title[], char node_artist[] ) {
+node* insert_front( node* first, char title[], char artist[] ) {
   node* newNode;
   newNode = malloc(sizeof(node));
-  newNode->next = next_node;
-  strcpy( newNode->title, node_title );
-  strcpy( newNode->artist, node_artist );
+  newNode->next = first;
+  strcpy( newNode->name, title );
+  strcpy( newNode->artist, artist );
   return newNode;
 }
 
@@ -19,12 +20,11 @@ node* insert_order( node* first, char title[], char artist[] ) { //inserts alpha
   node* newNode;
   newNode = malloc(sizeof(node));
   newNode->next = NULL;
-  strcpy( newNode->title, node_title );
-  strcpy( newNode->artist, node_artist );
+  strcpy( newNode->name, title );
+  strcpy( newNode->artist, artist );
 
   if( !first ) { //if empty list
-    insert_front( first, title, artist );
-    return;
+    return insert_front( first, title, artist );
   }
 
   node* temp = first; //dummy node
@@ -57,7 +57,7 @@ void print_list(node* first) {
     return;
   }
   while( first->next ) { //while a next node exists
-    printf( "Song: %s -- Artist: %s\n" , first->title, first->artist );
+    printf( "Song: %s -- Artist: %s\n" , first->name, first->artist );
     first = first->next;
   }
 }
@@ -65,7 +65,7 @@ void print_list(node* first) {
 //=================SEARCH FUNCTIONS=================
 node* find_song( node* first, char target[] ) { //search for a song within a single linkedlist
   while( first ) { // while current node isn't NULL
-    if( !strcmp(first->title, target) ) {
+    if( !strcmp(first->name, target) ) {
       return first;
     }
     first = first->next;
@@ -95,18 +95,21 @@ node* find_random( node* first ) {
 
 //=================REMOVE/DELETE FUNCTIONS=================
 node* remove_item( node* first, char title[] ) {
+  node* ret;
   while( first->next ) {
-    if( !strcmp(first->next->name,name) ) {
+    if( !strcmp(first->next->name,title) ) {
       node* kill = first->next;
+      ret = kill;
       first->next = first->next->next;
       free(kill);
-      return;
+      return ret;
     }
     first = first->next;
   }
+  return NULL;
 }
 
-void delete_list( node* first ) {
+void delete_LL( node* first ) {
   node* temp;
   while( first ) {
     temp = first->next;

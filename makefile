@@ -1,7 +1,12 @@
 GCC = gcc
 
+all: run clean
+	make comp
+	make run
+	make clean
+
 comp: main.c list.c list.h tunage.c tunage.h
-	$(GCC) main.c list.c tunage.c -o tunez
+	$(GCC) list.c tunage.c -o tunez
 
 run: comp
 	./tunez

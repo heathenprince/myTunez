@@ -8,6 +8,6 @@ void print_artist( node* table[], char artist[] );
 void print_library( node* table[] );
 void shuffle( node* table[] );
 node* delete_song( node* table[], char title[] );
-
+void delete_list( node* table[] );
 //helper
 node* whichList( node* table[], char c );

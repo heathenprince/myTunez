@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "list.h"
 #include "tunage.h"
 
@@ -18,7 +19,7 @@ void print_letter( node* table[], char c ) {
 void print_artist( node* table[], char artist[] ) {
   node* list = search_artist( table, artist ); //returns first node where artist appears
   while( !strcmp(list->artist,artist) ) { //while artists match
-    printf( "Song: %s -- Artist: %s\n" , list->title, list->artist );
+    printf( "Song: %s -- Artist: %s\n" , list->name, list->artist );
     list = list->next;
   }
 }
@@ -40,7 +41,7 @@ void shuffle( node* table[] ) {
       int i = rand() % 26; //keep shuffling if empty list
     }
     node* song = find_random( table[i] );
-    printf( "Song: %s -- Artist: %s\n" , song->title, song->artist );
+    printf( "Song: %s -- Artist: %s\n" , song->name, song->artist );
   }
 }
 
@@ -61,10 +62,24 @@ node* search_song( node* table[], char title[] ) {
 }
 
 node* delete_song( node* table[], char title[] ) {
-
+  int i;
+  node* first;
+  for( i = 0; i < 26; i++ ) {
+    if( find_song( table[i] , title ) ) {
+      first = table[i];
+      break;
+    }
+  }
+  node* kill = remove_item( first, title );
+  return kill;
 }
 
-
+void delete_list( node* table[] ) {
+  int i;
+  for (i=0 ; i<26; i++) {
+    delete_LL(table[i]);
+  }
+}
 
 //helper
 node* whichList( node* table[], char c ) { //returns first node of appropriate list
