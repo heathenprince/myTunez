@@ -28,7 +28,7 @@ int main() {
   insert(table, "Asking For It", "Hole");
   insert(table, "Swimming Pool", "The Front Bottoms");
   insert(table, "Sheena is a Punk Rocker", "The Ramones");
-  insert(table, "Wave Goodbye", "Ty Segall Band");
+  insert(table, "History Maker", "Dean Fujioka");
   insert(table, "Last Resort", "Papa Roach"); //cut my life into peaches, they are a tasty snack
 
   printList(table);
@@ -39,8 +39,8 @@ int main() {
   printf("\nSearching for 'Hole': ");
   search_artist(table, "Hole");
   print_artist(table,"Hole");
-  printf("\nSearching for 'Swimming Pool': ");
-  search_song(table, "Swimming Pool");
+  printf("\nSearching for 'History Maker': ");
+  search_song(table, "History Maker");
   printf("\nSearching for 'Realiti': ");
   search_song(table, "Realiti");
 
