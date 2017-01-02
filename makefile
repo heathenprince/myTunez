@@ -1,15 +1,11 @@
-GCC = gcc -g
+GCC = gcc
 
+comp: main.c list.c list.h tunage.c tunage.h
+	$(GCC) main.c list.c tunage.c -o tunez
 
-songtest: list.c playlist.c main.c
-	gcc list.c playlist.c main.c -o songtest
-
-run: songtest
-	./songtest
+run: comp
+	./tunez
 
 clean:
-	rm -rf songtest
-	rm -rf *~
-
-debug: 
-	gcc main.c -g -o songtest
+	rm *~
+	rm *.o
