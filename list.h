@@ -1,3 +1,6 @@
+#ifndef LIST_H
+#define LIST_H
+
 struct song_node {
   char name[256];
   char artist[256];
@@ -17,3 +20,5 @@ void delete_LL( node* first );
 
 //helper
 int list_length( node* first );
+
+#endif

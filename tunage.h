@@ -1,3 +1,5 @@
+#ifndef TUNAGE_H
+#define TUNAGE_H
 #include "list.h"
 
 void insert( node* table[], char title[], char artist[] );
@@ -11,3 +13,5 @@ node* delete_song( node* table[], char title[] );
 void delete_list( node* table[] );
 //helper
 node* whichList( node* table[], char c );
+
+#endif
