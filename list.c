@@ -22,6 +22,11 @@ node* insert_order( node* first, char title[], char artist[] ) { //inserts alpha
   strcpy( newNode->title, node_title );
   strcpy( newNode->artist, node_artist );
 
+  if( !first ) { //if empty list
+    insert_front( first, title, artist );
+    return;
+  }
+
   node* temp = first; //dummy node
 
   //================alphabetizing by artist
@@ -47,10 +52,10 @@ node* insert_order( node* first, char title[], char artist[] ) { //inserts alpha
 
 //=================PRINT FUNCTIONS=================
 void print_list(node* first) {
-  if( !first ) { //if empty list
+  if( !first ) { //if NULL
+    printf( "\n" );
     return;
   }
-
   while( first->next ) { //while a next node exists
     printf( "Song: %s -- Artist: %s\n" , first->title, first->artist );
     first = first->next;
@@ -78,7 +83,6 @@ node* find_artist( node* first, char target[] ) {
   return NULL;
 }
 
-
 node* find_random( node* first ) {
   srand(time(NULL)); //initialize rand num generator
   int i = rand() % list_length(first); //mod rand num by list length to get num in range [0,len)
@@ -89,9 +93,26 @@ node* find_random( node* first ) {
 	return first;
 }
 
-//=================REMOVE FUNCTIONS=================
-node* remove_node( int i ) {
-  return NULL;
+//=================REMOVE/DELETE FUNCTIONS=================
+node* remove_item( node* first, char title[] ) {
+  while( first->next ) {
+    if( !strcmp(first->next->name,name) ) {
+      node* kill = first->next;
+      first->next = first->next->next;
+      free(kill);
+      return;
+    }
+    first = first->next;
+  }
+}
+
+void delete_list( node* first ) {
+  node* temp;
+  while( first ) {
+    temp = first->next;
+    free(first);
+    first = temp;
+  }
 }
 
 //=================HELPER FUNCTIONS=================
