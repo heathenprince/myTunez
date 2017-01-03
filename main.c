@@ -56,7 +56,7 @@ int main() {
   shuffle(table);
 
   //=====TESTING DELETE=====
-  printf("\nTESTING DELETE of 'Street Punk':\n");
+  printf("\nTESTING DELETE of 'Letterbomb':\n");
   delete_song(table,"Letterbomb");
   print_library(table);
   delete_list(table); //NOT WORKING
