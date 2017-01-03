@@ -16,6 +16,11 @@ node* insert_front( node* first, char title[], char artist[] ) {
 }
 
 node* insert_order( node* first, char title[], char artist[] ) { //inserts alphabetically by artist
+
+  if( !first ) { //if empty list
+    return insert_front( first, title, artist );
+  }
+
   //=================creating the new node
   node* newNode;
   newNode = malloc(sizeof(node));
@@ -23,9 +28,6 @@ node* insert_order( node* first, char title[], char artist[] ) { //inserts alpha
   strcpy( newNode->name, title );
   strcpy( newNode->artist, artist );
 
-  if( !first ) { //if empty list
-    return insert_front( first, title, artist );
-  }
 
   node* temp = first;
   //================alphabetizing by artist
@@ -108,7 +110,7 @@ node* remove_item( node* first, char title[] ) {
 }
 
 void delete_LL( node* first ) {
-  node* temp;
+  node* temp = first;
   while( first ) {
     temp = first->next;
     free(first);
