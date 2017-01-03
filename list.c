@@ -109,13 +109,15 @@ node* remove_item( node* first, char title[] ) {
   return NULL;
 }
 
-void delete_LL( node* first ) {
+node* free_list( node* first ) {
   node* temp = first;
   while( first ) {
     temp = first->next;
     free(first);
     first = temp;
   }
+  first = NULL;
+  return first;
 }
 
 //=================HELPER FUNCTIONS=================

@@ -16,7 +16,7 @@ node* find_song( node* first, char song[] );
 node* find_artist( node* first, char artist[] );
 node* find_random( node* first );
 node* remove_item( node* first, char title[] );
-void delete_LL( node* first );
+node* free_list( node* first );
 
 //helper
 int list_length( node* first );

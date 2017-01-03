@@ -59,9 +59,6 @@ int main() {
   printf("\nTESTING DELETE of 'Letterbomb':\n");
   delete_song(table,"Letterbomb");
   print_library(table);
-  //delete_list(table); //NOT WORKING
-  delete_LL(table[0]);
-  print_list(table[0]);
-  printf("%d\n", table[0]==NULL);
+  delete_list(table); 
   return 0;
 }

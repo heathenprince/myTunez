@@ -87,8 +87,9 @@ node* delete_song( node* table[], char title[] ) {
 void delete_list( node* table[] ) {
   int i;
   for ( i = 0; i < 26; i++ ) {
-    delete_LL(table[i]);
+    free_list(table[i]);
   }
+  table = NULL;
 }
 
 //helper
