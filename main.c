@@ -13,11 +13,12 @@ int main() {
 
   printf("TESTING ADD AND PRINT:\n");
   insert(table, "Jesus of Suburbia", "Green Day");
+  insert(table, "Letterbomb", "Green Day");
   insert(table, "Get Away", "Yuck");
   insert(table, "Brooklyn Baby", "Lana Del Rey");
-  insert(table, "The World is Yours", "Nas");
-  insert(table, "Realiti", "Grimes");
-  insert(table, "Angeles", "Elliott Smith");
+  insert(table, "REALiTi", "Grimes");
+  insert(table, "Kill V. Maim", "Grimes");
+  insert(table, "Tuscan Leather","Drake");
   insert(table, "Three Seed", "Silversun Pickups");
   insert(table, "Common Reactor", "Silversun Pickups");
   insert(table, "Lazy Eye", "Silversun Pickups");
@@ -26,30 +27,39 @@ int main() {
   insert(table, "Celebrity Skin", "Hole");
   insert(table, "Violet", "Hole");
   insert(table, "Asking For It", "Hole");
-  insert(table, "Swimming Pool", "The Front Bottoms");
-  insert(table, "Sheena is a Punk Rocker", "The Ramones");
+  insert(table, "Your Graduation","Modern Baseball");
+  insert(table, "Paralytic States","Against Me!");
+  insert(table, "Shirtsleeves","Ed Sheeran");
+  insert(table, "What's My Age Again?","Blink-182");
+  insert(table, "Nobody Puts Baby In The Corner", "Fall Out Boy");
   insert(table, "History Maker", "Dean Fujioka");
-  insert(table, "Last Resort", "Papa Roach"); //cut my life into peaches, they are a tasty snack
+  insert(table, "Street Punk", "Hunx & His Punx");
+  insert(table, "Bring Me To Life","Evanescence");
 
-  printList(table);
+  print_library(table);
   printf("\nTESTING SEARCH AND PRINT\n");
-  printf("Searching for 'Silversun Pickups': ");
+  printf("Searching for 'Silversun Pickups':\n");
   search_artist(table, "Silversun Pickups");
   print_artist(table,"Silversun Pickups");
-  printf("\nSearching for 'Hole': ");
+
+  printf("\nSearching for 'Hole':\n");
   search_artist(table, "Hole");
   print_artist(table,"Hole");
-  printf("\nSearching for 'History Maker': ");
-  search_song(table, "History Maker");
-  printf("\nSearching for 'Realiti': ");
-  search_song(table, "Realiti");
+
+  printf("\nSearching for 'Bring Me To Life': ");
+  search_song(table, "Bring Me To Life");
+  printf("\nSearching for 'REALiTi': ");
+  search_song(table, "REALiTi");
 
   //=====TESTING SHUFFLE=====
+  printf("\nTESTING SHUFFLE\n");
   shuffle(table);
 
-  printf("\nTESTING DELETE of 'Angeles':\n");
-  delete_song(table,"Angeles");
-  print_list(table);
-  delete_list(table);
+  //=====TESTING DELETE=====
+  printf("\nTESTING DELETE of 'Street Punk':\n");
+  delete_song(table,"Letterbomb");
+  print_library(table);
+  delete_list(table); //NOT WORKING
+  printf("%d\n", table==NULL);
   return 0;
 }

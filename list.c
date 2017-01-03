@@ -27,27 +27,25 @@ node* insert_order( node* first, char title[], char artist[] ) { //inserts alpha
     return insert_front( first, title, artist );
   }
 
-  node* temp = first; //dummy node
-
+  node* temp = first;
   //================alphabetizing by artist
-  while( temp->next ) { //while a next node exists
-    if( strcmp(temp->next->artist, newNode->artist) < 0 ) {
+  while( temp->next ) { //while temp node is not last node
+    if( strcmp(temp->next->artist, newNode->artist) > 0 ) {
       newNode->next = temp->next;
       temp->next = newNode;
-      temp = temp->next;
       return first; //returns beginning of list, b/c why not
     }
-    temp->next = newNode;
-    return first;
+    temp = temp->next;
   }
-
   //================if temp/current node is last node...
   if(strcmp(newNode->artist, temp->artist) < 0) {
-    newNode->next = temp;
+    newNode->next = temp; //newNode --> temp
     return newNode;
   }
-  temp->next = newNode;
+
+  temp->next = newNode; //temp --> newNode
   return first;
+
 }
 
 //=================PRINT FUNCTIONS=================
@@ -56,7 +54,7 @@ void print_list(node* first) {
     printf( "\n" );
     return;
   }
-  while( first->next ) { //while a next node exists
+  while( first ) { //while a next node exists
     printf( "Song: %s -- Artist: %s\n" , first->name, first->artist );
     first = first->next;
   }
@@ -84,7 +82,7 @@ node* find_artist( node* first, char target[] ) {
 }
 
 node* find_random( node* first ) {
-  srand(time(NULL)); //initialize rand num generator
+  //srand(time(NULL)); //initialize rand num generator
   int i = rand() % list_length(first); //mod rand num by list length to get num in range [0,len)
 
 	for (i; i; i--) {// iterate to ith element in linkedlist

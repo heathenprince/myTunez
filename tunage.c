@@ -18,7 +18,7 @@ void print_letter( node* table[], char c ) {
 
 void print_artist( node* table[], char artist[] ) {
   node* list = search_artist( table, artist ); //returns first node where artist appears
-  while( !strcmp(list->artist,artist) ) { //while artists match
+  while( list && !strcmp(list->artist,artist) ) { //while artists match
     printf( "Song: %s -- Artist: %s\n" , list->name, list->artist );
     list = list->next;
   }
@@ -34,15 +34,24 @@ void print_library( node* table[] ) {
 
 void shuffle( node* table[] ) {
   srand(time(NULL));
-  int i = rand() % 26;
-  int ctr;
-  for( ctr = 0; ctr < 10; ctr++ ) {
-    while( !table[i] ) {
-      int i = rand() % 26; //keep shuffling if empty list
+  int ctr = 0;
+  int i;
+  node* song;
+  while( ctr < 10 ){
+    i = rand() % 26;
+    if( table[i] ) {
+      song = find_random( table[i] );
+      printf( "Song: %s -- Artist: %s\n" , song->name, song->artist );
+      ctr++;
     }
-    node* song = find_random( table[i] );
-    printf( "Song: %s -- Artist: %s\n" , song->name, song->artist );
   }
+  /*
+
+
+    song = find_random( table[i] );
+    printf("%d\n",i);
+    //printf( "Song: %s -- Artist: %s\n" , song->name, song->artist );
+  }*/
 }
 
 node* search_artist( node* table[], char artist[] ) {
@@ -59,6 +68,7 @@ node* search_song( node* table[], char title[] ) {
       return found;
     }
   }
+  return NULL;
 }
 
 node* delete_song( node* table[], char title[] ) {
@@ -76,7 +86,7 @@ node* delete_song( node* table[], char title[] ) {
 
 void delete_list( node* table[] ) {
   int i;
-  for (i=0 ; i<26; i++) {
+  for ( i = 0; i < 26; i++ ) {
     delete_LL(table[i]);
   }
 }
